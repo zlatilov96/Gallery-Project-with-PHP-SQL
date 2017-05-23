@@ -60,6 +60,7 @@ b {
 
 .pic {
 	text-align: center;
+	margin-top: 60px;
 }
 
 .description {
@@ -133,8 +134,60 @@ hr {
 	margin-top: 20px;
 }
 
+.single-details {
+	text-align: center;
+}
+
+.item-shadow {
+	-webkit-box-shadow: 1px 1px 8px 0px rgba(46,46,46,1);
+	-moz-box-shadow: 1px 1px 8px 0px rgba(46,46,46,1);
+	box-shadow: 1px 1px 8px 0px rgba(46,46,46,1);
+}
+
+.confirm {
+	text-align: center;
+	padding-top: 3px;
+	color: blue;
+}
+
 footer {
 	text-align: center;
 	margin-top: 110px;
 	border-top: 1px solid #333;
+}
+
+/* CSS for the responsive design */
+
+@media (min-width: 550px) and (max-width: 800px) {
+	img {
+		width: 150px;
+		height: 100px;
+	}
+}
+
+@media (min-width: 800px) and (max-width: 915px) {
+	img {
+		width: 200px;
+		height: 150px;
+	}
+}
+
+@media (min-width: 915px) and (max-width: 1040px) {
+	img {
+		width: 250px;
+		height: 200px;
+	}
+}
+
+@media (min-width: 1040px) and (max-width: 1190px) {
+	img {
+		width: 300px;
+		height: 250px;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+	.links a {
+		font-size: 14px;
+	}
 }

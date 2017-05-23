@@ -83,22 +83,45 @@
 		</div>
 	</header>
 	
-	<div class="w3-row w3-container">
+	<!-- Displaying the details of a Single photo (title, the image, description, keywords) -->
 	
-		<!-- Main Content -->
-		<h1 class="main-title">All Photos</h1>
-		
-		<div class="w3-col m12 l12 main-content">
-		   <div class="w3-row w3-container">
-		   
-		   		<!-- Getting the products from the database and displaying them into the front page. -->
-		   		<!-- function getAll() is located into the functions.php file -->
-		  		<?php getAll(); ?>
-
-			</div>
-		</div> <!-- END Main Content -->
-	</div>
-	
-	<footer>
-		<p>PhotoGallery &copy; 2017</p>
-	</footer>
+	<div class="w3-col m12 l12 single-details">
+			<?php
+				
+			// Getting the Product Id with the $_GET function in order to display information about 1 certain product only
+			if(isset($_GET['photo_id'])) {
+				$photo_id = $_GET['photo_id'];
+			}
+			$get_pro = "SELECT * FROM gallery WHERE photo_id='$photo_id'";
+			
+				$run_pro = mysqli_query($conn, $get_pro);
+					
+				// Fetching the data from the DB (without DESC and Keywords) because we dont need them on the first page of the website
+				while ($row_pro = mysqli_fetch_array($run_pro)) {
+					$photo_id = $row_pro['photo_id'];
+					$photo_title = $row_pro['photo_title'];
+					$photo_image = $row_pro['photo_image'];
+					$photo_desc = $row_pro['photo_desc'];
+					$photo_keywords = $row_pro['photo_keywords'];
+					
+					// Displaying the photo into specified places within the page
+					echo "
+						<div class='w3-col m12 l12 main-content'>
+							<h3>$photo_title</h3>
+							<img src='images/$photo_image' class='w3-animate-opacity img-item' width='1080' height='800'' />
+							<p>
+								<strong style='text-decoration: underline;'>Description </strong>
+								<p>$photo_desc </p>
+							</p>
+							<p>
+								<strong style='text-decoration: underline;'><p>Keywords</p></strong>
+								<span>$photo_keywords </span>
+							</p>
+							<a href='index.php' style='float: center; font-size: 16px; text-decoration: underline;'>Back to Homepage</a> |
+							<a href='gallery.php' style='float: center; font-size: 16px; text-decoration: underline;'>Back to Gallery</a>
+						</div>
+					";
+				}
+			?>
+			
+		</div>

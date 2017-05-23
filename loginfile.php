@@ -23,59 +23,40 @@
       	
       	$row = mysqli_fetch_array($data);
       	$password_hashed = $row['password'];
-      	
-      	
-      	
-      	// Login with working hash function
-      	
+
+      	// Login with hash function. If "Remember Me" checkbox is checked, user will be remembered for 30 days.
       	if (password_verify($password, $password_hashed)) {
-      		echo 'works!';
-      		echo $_SESSION['username'] = $row['username'];
-      		echo $_SESSION['userid'] = $row['userid'];
-      		echo $_SESSION['email'] = $row['email'];
-      	}
-      	else{
+      		if(isset($_POST['rememberme'])) {
+      			
+      			$_SESSION['username'] = $row['username'];
+      			$_SESSION['userid'] = $row['userid'];
+      			$_SESSION['email'] = $row['email'];
+      			
+      			setcookie('userid', $row['userid'], time() + (60 * 60 * 24 * 30));
+      			setcookie('username', $row['username'], time() + (60 * 60 * 24 * 30));
+      			setcookie('email', $row['email'], time() + (60 * 60 * 24 * 30));
+      			
+      		// If checkbox is not checked, user will be remembered till the end of the session.
+      		} else {
+      			$_SESSION['username'] = $row['username'];
+      			$_SESSION['userid'] = $row['userid'];
+      			$_SESSION['email'] = $row['email'];
+      		}
+      	}      
+      	
+      	// Shows an error when wrong username / password is filled in.
+      	else {
       		echo "<div class='err'>";
       		echo 'The username or password is <strong>incorrect</strong>. Please try again!';
       		echo "</div>";
       	}
-      }
-
-      /*
-      
-      if (!empty($username) && !empty($password)) {
-        // Fetch the userid, username, password, and city from the database
-        $query = "SELECT userid, username, email FROM user WHERE username = '$username' AND password = SHA('$password')";
-        $data = mysqli_query($dbc, $query);
-
-        if (mysqli_num_rows($data) == 1) {
-          // The login is OK. Set the userid, username, and city session variables. Set the cookies. Redirect to the home page
-          $row = mysqli_fetch_array($data);
-          
-          $_SESSION['userid'] = $row['userid'];
-          $_SESSION['username'] = $row['username'];
-          $_SESSION['email'] = $row['email'];
-          
-          setcookie('userid', $row['userid'], time() + (60 * 60 * 24 * 30));    // expires in 30 days
-          setcookie('username', $row['username'], time() + (60 * 60 * 24 * 30));  // expires in 30 days
-          setcookie('email', $row['email'], time() + (60 * 60 * 24 * 30));  // expires in 30 days
-          
-          // Check this nice way to get the URL of the app's home page
-          $home_url = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/index.php';
-          header('Location: ' . $home_url);
-        }
-        else {
-          // The username or password are incorrect so set an error message
-          $error_msg = 'Sorry, the username/password you entered is not correct. Try again!';
-        }
-      }
+      } 
+      // In all the other "wrong" cases display this following message.
       else {
-        // The username/password weren't entered so set an error message
-        $error_msg = 'Sorry, you must enter your username and password to log in. Try again!';
+      	echo "<div class='err'>";
+      	echo 'The username <strong>does not</strong> exist! Please try again!';
+      	echo "</div>";
       }
-      
-      */
-      
     }
   }
 ?>

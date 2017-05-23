@@ -2,6 +2,7 @@
 session_start();
 include("loginfile.php");
 include("signupfile.php");
+include("functions.php");
 
 /* If the session data does not exist (i.e we are starting a new session), try to set the session's data with
  the cookies that were saved when the user made his/her last login (i.e: the cookies that the client browser is sending in its HTTP GET request to this index.php script)
@@ -28,7 +29,7 @@ if (!isset($_SESSION['userid'])) {
 
 <?php
  
-  // Generate the navigation menu
+  // Displaying the relative to the user page (guest / signed in)
   if (isset($_SESSION['userid'])) {
   	echo "<div class='welcome'>";
   	echo 'You are logged in as ' . '<strong>' . $_SESSION['username'] . '</strong>' . '!';

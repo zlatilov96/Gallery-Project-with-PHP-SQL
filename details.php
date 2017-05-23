@@ -35,13 +35,13 @@
   	echo 'You are logged in as ' . '<strong>' . $_SESSION['username'] . '</strong>' . '!';
   	echo ' Enjoy your stay here!';
   	echo "</div>";
-    include("in.php");
+  	include("details-in.php");
   }
   else {
   	echo "<div class='not-in'>";
     echo "You need to be logged in to publish photos!";
     echo "</div>";
-    include("notin.php");
+    include("details-notin.php");
   }
 ?>
 

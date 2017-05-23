@@ -29,7 +29,7 @@ if (!isset($_SESSION['userid'])) {
 
 <?php
  
-  // Generate the navigation menu
+  // Displaying the relative to the user page (guest / signed in)
   if (isset($_SESSION['userid'])) {
   	echo "<div class='welcome'>";
   	echo 'You are logged in as ' . '<strong>' . $_SESSION['username'] . '</strong>' . '!';

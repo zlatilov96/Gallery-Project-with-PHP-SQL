@@ -52,8 +52,6 @@ require_once('dbinfo.php');
         // Redirect to the home page
         $home_url = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/index.php';
         header('Location: ' . $home_url);
-        
-        // echo '<p>Your new account has been successfully created. You\'re now ready to <a href="login.php">log in</a>.</p>';
             
         // mysqli_close($dbc);
         exit();
@@ -66,7 +64,10 @@ require_once('dbinfo.php');
       }
     }
     else {
-      echo 'You must enter all of the sign-up data, including the desired password twice.';
+    	echo "<div class='err'>";
+    	echo 'You must enter all of the sign-up data, including the desired password twice.';
+    	echo "</div>";
+    	$username = "";
     }
   }
 

@@ -40,7 +40,6 @@
 
 			  <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
 				<button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
-				<span class="w3-right w3-padding w3-hide-small">Forgot <a href="#" class="underline">password?</a></span>
 			  </div>
 
 			</div>
@@ -61,7 +60,7 @@
 				  <label><b>Username</b></label>
 				  <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username" name="username" required>
 				  <label><b>Email Address</b></label>
-				  <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Email Address" name="email" required>
+				  <input class="w3-input w3-border w3-margin-bottom" type="email" placeholder="Enter Email Address" name="email" required>
 				  <label><b>Password</b></label>
 				  <input class="w3-input w3-border" type="password" placeholder="Enter Password" name="password1" required> <br>
 				  <label><b>Re-type Password</b></label>
@@ -72,7 +71,6 @@
 
 			  <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
 				<button onclick="document.getElementById('id02').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
-				<span class="w3-right w3-padding w3-hide-small">Forgot <a href="#" class="underline">password?</a></span>
 			  </div>
 
 			</div>
@@ -102,43 +100,84 @@
 				    	
 				    	<!-- FORM -->
 				    
-				    	<form action="/action_page.php" class="w3-container w3-card-4 w3-light-grey w3-text-blue w3-margin contact-form">
+				    	<form action="" method="POST" class="w3-container w3-card-4 w3-light-grey w3-text-blue w3-margin contact-form">
 							<h2 class="w3-center">Contact Form</h2>
 							 
 							<div class="w3-row w3-section">
 							  <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
 							    <div class="w3-rest">
-							      <input class="w3-input w3-border" name="first" type="text" placeholder="Your Name">
+							      <input class="w3-input w3-border" name="fullname" type="text" required placeholder="Your Name">
 							    </div>
 							</div>
 							
 							<div class="w3-row w3-section">
 							  <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-comment"></i></div>
 							    <div class="w3-rest">
-							      <input class="w3-input w3-border" name="last" type="text" placeholder="Topic">
+							      <input class="w3-input w3-border" name="topic" type="text" required placeholder="Topic">
 							    </div>
 							</div>
 							
 							<div class="w3-row w3-section">
 							  <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-envelope-o"></i></div>
 							    <div class="w3-rest">
-							      <input class="w3-input w3-border" name="email" type="text" placeholder="Your Email">
+							      <input class="w3-input w3-border" name="email" type="text" required placeholder="Your Email">
 							    </div>
 							</div>
 							
 							<div class="w3-row w3-section">
 							  <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-pencil"></i></div>
 							    <div class="w3-rest">
-							      <input class="w3-input w3-border" name="message" type="text" placeholder="Message">
+							      <input class="w3-input w3-border" name="message" type="text" required placeholder="Message">
 							    </div>
 							</div>
 							
-							<button class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding">Send</button>
+							<button type="submit" name="submit" class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding">Send</button>
 							
-							</form>
+						</form>
 					    
 					    <!-- END FORM -->
+					    
+					    <!-- Using the PHPMailer to make the contact form working properly and connected -->
+					    <!-- to an email address photogallery335@gmail.com -->
+					    <?php 
+
+							// When Send button is clicked, we create a message with the inputs of the user.
+							if(isset($_POST['submit'])) {
+								$message =
+								'Name: ' . $_POST['fullname'] . '<br>
+								Topic: ' . $_POST['topic'] . '<br>
+								Email: ' . $_POST['email'] . '<br>
+								Message: ' . $_POST['message'] . '<br>';
+								
+								require 'phpmailer/PHPMailerAutoload.php';
+								
+								$mail = new PHPMailer();
+								
+								$mail->isSMTP();                                      // Set mailer to use SMTP
+								$mail->Host = 'smtp.gmail.com';  					  // Specify main and backup SMTP servers
+								$mail->SMTPAuth = true;                               // Enable SMTP authentication
+								$mail->Username = 'photogallery335@gmail.com';        // SMTP username
+								$mail->Password = 'photo335';                         // SMTP password
+								$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+								$mail->Port = 587;                                    // TCP port to connect to
+								
+								$mail->setFrom($_POST['email'], $_POST['fullname']);
+								$mail->addAddress('photogallery335@gmail.com', 'PhotoGallery');     // Add a recipient
+								$mail->addReplyTo($_POST['email'], $_POST['fullname']);
+								$mail->Subject = ($_POST['topic']);
+								$mail->msgHTML($message);
+								$mail->isHTML(true);                                  // Set email format to HTML
+								
+								if(!$mail->send()) {
+									echo "<div class='confirm'>Your message could not be sent.</div>";
+									echo "<div class='confirm'>Mailer Error: ' . $mail->ErrorInfo</div>";
+								} else {
+									echo "<div class='confirm'>Your message has been sent!</div>";
+								}
+							}
+						?>
 				    	
+				    	<!-- Some more "Company" info -->
 				    	<div class="w3-container" style="text-align:center">
 				          <hr>
 				          <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>PhotoGallery</p>
@@ -148,8 +187,8 @@
 				          <hr>
 				          
 				          <h3 class="title"><strong>Location</strong></h3>
-				          <!-- Add Google Maps -->
-      					  <div id="googleMap" class="w3-round-large w3-greyscale" style="width:100%;height:300px;"></div>
+				          <!-- Google Maps -->
+      					  <div class="img-item" id="googleMap" class="w3-round-large w3-greyscale" style="width:100%;height:300px;"></div>
 				        </div>
 				    </div>
 				    
@@ -164,7 +203,7 @@
 		</div> <!-- END Main Content -->
 	</div>
 	
-	<!-- Add Google Maps -->
+	<!-- Google Maps JavaScript -->
 	<script>
 	function myMap()
 	{
@@ -186,5 +225,5 @@
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdEISbrk-_X40SXh2xmqXLr_pKuZrjtjM&callback=myMap"></script>
 	
 	<footer>
-		<p>PhotoGenik &copy; 2016</p>
+		<p>PhotoGallery &copy; 2017</p>
 	</footer>
