@@ -1,4 +1,4 @@
-**Gallery Project with PHP/SQL functionality
+**Gallery Project with PHP/SQL functionality**
 
 This is a gallery project created for one of my university courses concentrating on PHP/SQL.
 
