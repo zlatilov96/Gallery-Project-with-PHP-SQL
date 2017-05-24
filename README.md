@@ -17,6 +17,8 @@ As an addition to this, users can be also deleted from the Admin Panel of the we
 
 - Open PHPMyAdmin with your browser and import the "localdb.sql" file.
 
+- Open both "dbinfo.php" files, the one in the main folder of the project (where index.php is located) as well as the one located in "admin_area" folder of the project. Then, fill in your own database credentials.
+
 - Access the project through this link (http://localhost/name-of-folder-you-saved-the-project/index.php)
 
 - Check if everything is working properly.
