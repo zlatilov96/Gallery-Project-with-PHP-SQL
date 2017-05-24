@@ -21,9 +21,9 @@ Installation:
 
 - The Admin Panel can be accessed through this link (http://localhost/name-of-folder-you-saved-the-project/admin_area/index.php)
 
-- Use the following credentials to access the Admin Panel and use the functionallity there
-  Username: admin
-  Passowrd: 1234
+- Use the following credentials to access the Admin Panel and use the functionallity there:
+  - Username: admin
+  - Passowrd: 1234
   
 Additional Information:
 
