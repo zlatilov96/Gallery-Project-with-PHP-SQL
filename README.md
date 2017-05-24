@@ -13,6 +13,8 @@ As an addition to this, users can be also deleted from the Admin Panel of the we
 
 - Copy all the project files into the "htdocs" directory of your XAMPP into a folder of your choice.
 
+- Go to the folder you just saved the project to and unzip "phpmailer.zip" file. (I was not able to upload the folder just like the other two folders because it contains more than 100 files in it). PHPMailer is used to make the connection of the contact form with Gmail.
+
 - Open PHPMyAdmin with your browser and import the "localdb.sql" file.
 
 - Access the project through this link (http://localhost/name-of-folder-you-saved-the-project/index.php)
