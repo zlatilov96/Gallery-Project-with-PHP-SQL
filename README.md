@@ -1,4 +1,4 @@
-Gallery Project with PHP/SQL functionality
+**Gallery Project with PHP/SQL functionality
 
 This is a gallery project created for one of my university courses concentrating on PHP/SQL.
 
@@ -7,7 +7,7 @@ The idea behind this project is to make users able to upload photos they have ta
 Admin Panel is available for the admin of this gallery website. The admin can view, publish, edit / update and delete photos users have published from the admin panel.
 As an addition to this, users can be also deleted from the Admin Panel of the website.
 
-Installation:
+**Installation:**
 
 - Install XAMPP
 
@@ -25,6 +25,10 @@ Installation:
   - Username: admin
   - Passowrd: 1234
   
-Additional Information:
+**Additional Information:**
+
+All the images used for this project are free of copyright under Creative Commons CC0. They can be used for anything you like, even for commercial use.
 
 You can feel free to use, change, update or develop further this project.
+
+**You can find more information on the Wiki page of this project.**
